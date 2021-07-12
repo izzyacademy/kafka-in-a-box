@@ -1,3 +1,10 @@
+# Python Folders and Files
+venv
+.idea
+.settings
+.project
+
+
 # Compiled class file
 *.class
 
