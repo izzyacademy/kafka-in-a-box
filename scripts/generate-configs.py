@@ -22,6 +22,9 @@ class GenerateConfig:
         with open(default_configs, "rb") as f:
             self.p.load(f, "utf-8")
 
+    def set_key_overrides(self, overrides):
+        self.key_overrides = overrides
+
     def add_key_override(self, target_key, special_key):
         self.key_overrides.__setitem__(target_key, special_key)
 
@@ -40,7 +43,7 @@ class GenerateConfig:
 
                 # Strip out characters we don't need
                 # Clean up and prepare for final capture
-                property_key = key.replace(self.config_prefix, "")
+                property_key = key.replace(self.config_prefix, "", 1)
                 property_key = property_key.replace("_", ".")
                 property_key = property_key.lower()
 
@@ -55,7 +58,8 @@ class GenerateConfig:
     def save_properties(self):
 
         with open(self.config_name, "wb") as f:
-            self.p.store(f, initial_comments="Properties File", encoding="iso-8859-1", strict=True, strip_meta=True)
+            self.p.store(f, initial_comments=" Auto-generated Properties File", encoding="iso-8859-1",
+                         strict=True, strip_meta=True)
 
     def print_properties(self):
 
@@ -120,11 +124,31 @@ def display_help():
 def process_zookeeper_setup(target_properties_file, default_properties_file):
     generator = GenerateZookeeperConfigs(target_properties_file, default_properties_file)
 
-    generator.add_key_override("tick.time", "tickTime")
-    generator.add_key_override("data.dir", "dataDir")
-    generator.add_key_override("client.port", "clientPort")
-    generator.add_key_override("init.limit", "initLimit")
-    generator.add_key_override("sync.limit", "syncLimit")
+    # https://zookeeper.apache.org/doc/r3.4.9/zookeeperAdmin.html#sc_configuration
+    key_overrides = {
+        "tick.time": "tickTime",
+        "data.dir": "dataDir",
+        "client.port": "clientPort",
+        "init.limit": "initLimit",
+        "sync.limit": "syncLimit",
+        "global.outstanding.limit": "globalOutstandingLimit",
+        "pre.alloc.size": "preAllocSize",
+        "snap.count": "snapCount",
+        "max.client.cnxns": "maxClientCnxns",
+        "client.port.address": "clientPortAddress",
+        "min.session.timeout": "minSessionTimeout",
+        "max.session.timeout": "maxSessionTimeout",
+        "leader.serves": "leaderServes",
+        "cnx.timeout": "cnxTimeout",
+        "autopurge.snap.retain.count": "autopurge.snapRetainCount",
+        "autopurge.purge.interval": "autopurge.purgeInterval",
+        "sync.enabled": "syncEnabled",
+        "election.alg": "electionAlg"
+    }
+
+    generator.set_key_overrides(key_overrides)
+
+    generator.add_key_override("data.log.dir", "dataLogDir")
 
     generator.capture_properties()
     generator.save_properties()
