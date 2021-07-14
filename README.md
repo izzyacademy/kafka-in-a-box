@@ -103,7 +103,11 @@ docker-compose --env-file ./environment-variables.sh -f multi-node-docker-compos
 
 ```
 
-### Commands to Explore the Cluster
+### Commands to Explore the Cluster in Kraft Mode
+
+These commands are primarily for exploring the cluster in KRaft mode without Zookeeper.
+
+However, you can also use the syntax for creating topics to interact with clusters in legacy mode.
 
 ```shell
 # Log on to NodeId=2
