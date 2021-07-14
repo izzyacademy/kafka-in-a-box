@@ -14,7 +14,9 @@ It also containers docker compose scripts that allow you to run Apache Kafka 2.8
 
 To get started, simply clone the repository to your local machine and follow the steps to get in running in no time
 
-You will need to have Docker installed locally to run the containers
+You will need to have Docker installed locally to run the containers.
+
+All the docker images used to run the cluster are built locally on your machine.
 
 ```shell
 
@@ -31,18 +33,28 @@ Once the repository has been checked out, you can build the Docker images and ha
 
 ```shell
 
+# Builds the base image
 docker build . -f Base.Dockerfile -t localbuild.io/kafka-base:1.0
 
+# Creates the Docker image for Zookeeper
 docker build . -f Zookeeper.Dockerfile -t localbuild.io/zookeeper:1.0
 
+# Creates the Docker image for Kafka Brokers and Quorum Controllers
 docker build . -f Broker.Dockerfile -t localbuild.io/kafka:1.0
 
+# Creates the Docker image for Kafka Connect
 docker build . -f Connect.Dockerfile -t localbuild.io/connect:1.0
 
 ```
 
 
 ## Running the Containers in Docker Compose
+
+The following sections describe how to run the docker images as Kafka clusters
+
+The first section describes how to run a Kafka cluster in Zookeeper mode (legacy mode)
+
+The second section describes how to run a single and multi-node cluster in KRaft mode (without Zookeeper)
 
 ### Running in Legacy Mode (With Zookeeper)
 
@@ -64,9 +76,9 @@ docker-compose down --remove-orphans
 
 ```
 
-
 ### Running in KRaft Mode (Single-Node Cluster)
 
+This setup creates a single node cluster that runs without Zookeeper
 
 ```shell
 
@@ -81,15 +93,18 @@ docker-compose down --remove-orphans
 
 ### Running in KRaft Mode (Multi-Node Cluster)
 
-This deploys a multi-node cluster in KRaft mode
+This deploys a multi-node cluster in KRaft mode (without Zookeeper)
+
 - Node 1 (Controller)
 - Node 2 (Broker)
 - Node 3 (Controller, Broker)
 - Node 4 (Controller, Broker)
 
-This provides 3 controller nodes and 3 broker nodes
+This provides 3 controller nodes and 3 broker nodes (6-nodes altogether)
 
-It also has a debugger container that you can log in to explore the cluster
+It also has a debugger docker container that you can log in to explore the cluster
+
+Running the following commands allow you to boot up the cluster
 
 ```shell
 
