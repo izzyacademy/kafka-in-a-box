@@ -7,6 +7,8 @@ RUN apt-get update
 
 RUN apt-get -y install aptitude vim curl wget gnupg python3-pip openjdk-11-jdk
 
+RUN apt-get -y install inetutils-telnet inetutils-ping
+
 # https://pypi.org/project/jproperties/
 RUN pip install jproperties
 

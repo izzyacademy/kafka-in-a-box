@@ -1,11 +1,16 @@
 ---
+# Run the compose file as follows
+# docker-compose up
+# docker-compose down --remove-orphans
+#
 version: '2'
 
 networks:
   default:
-    name: izzyacademy_streams
+    name: izzyacademy_legacy_streams
 
 services:
+
   zookeeper:
     image: localbuild.io/zookeeper:1.0
     hostname: zookeeper
@@ -15,6 +20,16 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+
+  # You can use this to connect to the docker container once it is running
+  # docker exec -it debugger /bin/bash
+  debugger:
+    image: localbuild.io/kafka-base:1.0
+    hostname: debugger
+    container_name: debugger
+    entrypoint: [ 'sleep', '48h' ]
+    depends_on:
+      - zookeeper
 
   broker1:
     image: localbuild.io/kafka:1.0
@@ -29,6 +44,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 6000
       KAFKA_LISTENERS: 'PLAINTEXT_HOST://0.0.0.0:29092,PLAINTEXT://0.0.0.0:9092'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker1:29092,PLAINTEXT_HOST://localhost:9092
@@ -52,6 +68,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 6000
       KAFKA_LISTENERS: 'PLAINTEXT_HOST://0.0.0.0:29093,PLAINTEXT://0.0.0.0:9093'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker2:29093,PLAINTEXT_HOST://localhost:9093
@@ -75,6 +92,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 3
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 6000
       KAFKA_LISTENERS: 'PLAINTEXT_HOST://0.0.0.0:29094,PLAINTEXT://0.0.0.0:9094'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker3:29094,PLAINTEXT_HOST://localhost:9094

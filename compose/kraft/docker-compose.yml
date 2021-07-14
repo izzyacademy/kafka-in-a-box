@@ -1,0 +1,47 @@
+---
+# Run the compose file as follows
+# docker-compose up
+# docker-compose down --remove-orphans
+#
+version: '2'
+
+networks:
+  default:
+    name: izzyacademy_single_streams
+
+services:
+
+  # You can use this to connect to the docker container once it is running
+  # docker exec -it debugger /bin/bash
+  debugger:
+    image: localbuild.io/kafka-base:1.0
+    hostname: debugger
+    container_name: debugger
+    entrypoint: [ 'sleep', '48h' ]
+
+  node1:
+    image: localbuild.io/kafka:1.0
+    hostname: node1
+    container_name: node1
+    ports:
+      - "29092:29092"
+      - "19092:19092"
+      - "9092:9092"
+      - "9102:9102"
+    environment:
+      KAFKA_NODE_ID: '1'
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CLUSTER_ID: 'vlzHauhfTMq2S7cLtnwe6A'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@node1:19092'
+      KAFKA_LISTENERS: 'PLAINTEXT_HOST://0.0.0.0:29092,CONTROLLER://0.0.0.0:19092,PLAINTEXT://0.0.0.0:9092'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://node1:29092,PLAINTEXT_HOST://localhost:9092 # do not include controller socket here
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_JMX_PORT: 9102
+      KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'

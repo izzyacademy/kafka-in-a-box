@@ -17,6 +17,7 @@ class GenerateConfig:
         self.config_name = target_config_file
         self.default_configs = default_configs
         self.key_overrides = {}
+        self.key_excludes = []
 
         self.p = Properties()
         with open(default_configs, "rb") as f:
@@ -30,6 +31,9 @@ class GenerateConfig:
 
     def remove_key_override(self, target_key):
         self.key_overrides.pop(target_key, None)
+
+    def set_excluded_keys(self, keys_to_exclude):
+        self.key_excludes = keys_to_exclude
 
     # Capture Properties from Environment variables
     def capture_properties(self):
@@ -51,6 +55,9 @@ class GenerateConfig:
                 if self.key_overrides.keys().__contains__(property_key):
                     replacement_key = self.key_overrides.get(property_key)
                     property_key = replacement_key
+
+                if property_key in self.key_excludes:
+                    continue
 
                 # Set the property from the environment variable
                 self.p.__setitem__(property_key, value)
@@ -157,6 +164,10 @@ def process_zookeeper_setup(target_properties_file, default_properties_file):
 
 def process_broker_setup(target_properties_file, default_properties_file):
     generator = GenerateBrokerConfigs(target_properties_file, default_properties_file)
+
+    keys_to_exclude = ['cluster.id']
+    generator.set_excluded_keys(keys_to_exclude)
+
     generator.capture_properties()
     generator.save_properties()
     generator.print_properties()
