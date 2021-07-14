@@ -3,6 +3,19 @@
 
 A repository for generating artifacts and resources to run an Apache Kafka cluster on docker containers using vanilla Apache Kafka
 
+It uses the upstream Apache Kafka project with very minimal adaptation to run them on containers.
+
+The vanilla Apache Kafka artifacts are packaged into a container and environment variables are converted into configuration files that can be used to run the containers for 
+- Zookeeper
+- Kafka Broker
+- Kafka Connect
+
+It also containers docker compose scripts that allow you to run Apache Kafka 2.8.0 in both legacy mode (with Zookeeper) and KRaft mode (without Zookeeper)
+
+To get started, simply clone the repository to your local machine and follow the steps to get in running in no time
+
+You will need to have Docker installed locally to run the containers
+
 ```shell
 
 git clone git@github.com:izzyacademy/kafka-in-a-box.git
