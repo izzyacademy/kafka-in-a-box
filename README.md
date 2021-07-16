@@ -60,6 +60,7 @@ The second section describes how to run a single and multi-node cluster in KRaft
 
 It provides a 3-node cluster that depends on Zookeeper
 
+- Zookeeper Instance
 - Node 1 (Broker)
 - Node 2 (Broker)
 - Node 3 (Broker)
