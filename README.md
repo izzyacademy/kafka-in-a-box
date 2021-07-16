@@ -34,16 +34,16 @@ Once the repository has been checked out, you can build the Docker images and ha
 ```shell
 
 # Builds the base image
-docker build . -f Base.Dockerfile -t localbuild.io/kafka-base:1.0
+docker build . -f Base.Dockerfile -t apache.org/kafka-base:1.0
 
 # Creates the Docker image for Zookeeper
-docker build . -f Zookeeper.Dockerfile -t localbuild.io/zookeeper:1.0
+docker build . -f Zookeeper.Dockerfile -t apache.org/zookeeper:1.0
 
 # Creates the Docker image for Kafka Brokers and Quorum Controllers
-docker build . -f Broker.Dockerfile -t localbuild.io/kafka:1.0
+docker build . -f Broker.Dockerfile -t apache.org/kafka:1.0
 
 # Creates the Docker image for Kafka Connect
-docker build . -f Connect.Dockerfile -t localbuild.io/connect:1.0
+docker build . -f Connect.Dockerfile -t apache.org/connect:1.0
 
 ```
 
