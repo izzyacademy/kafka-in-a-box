@@ -1,4 +1,3 @@
-
 FROM apache.org/kafka-base:1.0
 
 # in Zookeeper, Brokers and Connect Docker images:
