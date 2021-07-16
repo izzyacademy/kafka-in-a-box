@@ -1,5 +1,5 @@
 
-FROM localbuild.io/kafka-base:1.0
+FROM apache.org/kafka-base:1.0
 
 # in Zookeeper, Brokers and Connect Docker images:
 # Copy over the python scripts and generate the configs for Kafka Nodes
@@ -14,4 +14,4 @@ EXPOSE 9092
 
 ENTRYPOINT ["/usr/local/software/kafka/bin/broker.entrypoint.sh"]
 
-# docker build . -f Broker.Dockerfile -t localbuild.io/kafka:1.0
+# docker build . -f Broker.Dockerfile -t apache.org/kafka:1.0

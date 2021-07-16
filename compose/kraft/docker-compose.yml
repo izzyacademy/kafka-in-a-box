@@ -14,13 +14,13 @@ services:
   # You can use this to connect to the docker container once it is running
   # docker exec -it debugger /bin/bash
   debugger:
-    image: localbuild.io/kafka-base:1.0
+    image: apache.org/kafka-base:1.0
     hostname: debugger
     container_name: debugger
     entrypoint: [ 'sleep', '48h' ]
 
   node1:
-    image: localbuild.io/kafka:1.0
+    image: apache.org/kafka:1.0
     hostname: node1
     container_name: node1
     ports:

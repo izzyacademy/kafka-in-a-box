@@ -12,7 +12,7 @@ networks:
 services:
 
   zookeeper:
-    image: localbuild.io/zookeeper:1.0
+    image: apache.org/zookeeper:1.0
     hostname: zookeeper
     container_name: zookeeper
     ports:
@@ -24,7 +24,7 @@ services:
   # You can use this to connect to the docker container once it is running
   # docker exec -it debugger /bin/bash
   debugger:
-    image: localbuild.io/kafka-base:1.0
+    image: apache.org/kafka-base:1.0
     hostname: debugger
     container_name: debugger
     entrypoint: [ 'sleep', '48h' ]
@@ -32,7 +32,7 @@ services:
       - zookeeper
 
   broker1:
-    image: localbuild.io/kafka:1.0
+    image: apache.org/kafka:1.0
     hostname: broker1
     container_name: broker1
     depends_on:
@@ -56,7 +56,7 @@ services:
       KAFKA_JMX_HOSTNAME: localhost
 
   broker2:
-    image: localbuild.io/kafka:1.0
+    image: apache.org/kafka:1.0
     hostname: broker2
     container_name: broker2
     depends_on:
@@ -80,7 +80,7 @@ services:
       KAFKA_JMX_HOSTNAME: localhost
 
   broker3:
-    image: localbuild.io/kafka:1.0
+    image: apache.org/kafka:1.0
     hostname: broker3
     container_name: broker3
     depends_on:
