@@ -103,6 +103,15 @@ This deploys a multi-node cluster in KRaft mode (without Zookeeper)
 
 This provides 3 controller nodes and 3 broker nodes (6-nodes altogether)
 
+Which ends up looking like this when you expand it:
+
+- Node 1 (Controller)
+- Node 2 (Broker)
+- Node 3 (Controller)
+- Node 3 (Broker)
+- Node 4 (Controller)
+- Node 4 (Broker)
+
 It also has a debugger docker container that you can log in to explore the cluster
 
 Running the following commands allow you to boot up the cluster
