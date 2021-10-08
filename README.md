@@ -140,9 +140,7 @@ docker build . -f Connect.Dockerfile -t apache.org/connect:3.0
 
 ### Commands to Explore the Cluster in Legacy Mode
 
-These commands are primarily for exploring the cluster in KRaft mode without Zookeeper.
-
-However, you can also use the syntax for creating topics to interact with clusters in legacy mode.
+These commands are primarily for exploring the cluster in Legacy mode with Zookeeper.
 
 ```bash
 # Log on to NodeId=2
