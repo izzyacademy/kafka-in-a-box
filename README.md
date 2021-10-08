@@ -10,7 +10,7 @@ The vanilla Apache Kafka artifacts are packaged into a container and environment
 - Kafka Broker
 - Kafka Connect
 
-It also containers docker compose scripts that allow you to run Apache Kafka 2.8.0 in both legacy mode (with Zookeeper) and KRaft mode (without Zookeeper)
+It also containers docker compose scripts that allow you to run Apache Kafka 2.8.1 or 3.0.0 in both legacy mode (with Zookeeper) and KRaft mode (without Zookeeper)
 
 To get started, simply clone the repository to your local machine and follow the steps to get in running in no time
 
@@ -26,7 +26,7 @@ git clone git@github.com:izzyacademy/kafka-in-a-box.git
 # navigate to the code base
 cd kafka-in-a-box
 
-# switch to the 3.0.0 branch
+# switch to the 3.0.0 branch, you can also try out the 2.8.1 branch if you are interested in that version of Kafka
 git checkout 3.0.0
 
 ```
