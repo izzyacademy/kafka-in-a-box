@@ -3,9 +3,9 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Defining variables for project artifacts - location, project version and scala versions
-ENV PROJECT_DOWNLOAD_URL="https://downloads.apache.org/kafka/2.8.0"
-ENV PROJECT_KAFKA_VERSION="2.8.0"
-ENV PROJECT_SCALA_VERSION="2.12"
+ENV PROJECT_DOWNLOAD_URL="https://downloads.apache.org/kafka/3.0.0"
+ENV PROJECT_KAFKA_VERSION="3.0.0"
+ENV PROJECT_SCALA_VERSION="2.13"
 
 RUN apt-get update
 
@@ -42,6 +42,6 @@ WORKDIR /usr/local/software/kafka/scripts
 # Copy over the python scripts and generate the configs for Zookeeper
 # Start up Docker containers with Config settings using ENVIRONMENT VARIABLES
 
-# docker build . -f Base.Dockerfile -t apache.org/kafka-base:1.0
+# docker build . -f Base.Dockerfile -t izzyacademy/kafka-base:3.0.0
 
 # docker run --name kafkabase -it apache.org/kafka-base:1.0

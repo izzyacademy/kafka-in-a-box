@@ -18,35 +18,22 @@ You will need to have Docker installed locally to run the containers.
 
 All the docker images used to run the cluster are built locally on your machine.
 
-```shell
+```bash
 
+# get the git repository
 git clone git@github.com:izzyacademy/kafka-in-a-box.git
 
+# navigate to the code base
 cd kafka-in-a-box
 
+# switch to the 3.0.0 branch
+git checkout 3.0.0
 
 ```
 
-## Building the Docker Images
+If you would like to build the Docker images yourself, checkout the section below on building Docker images from scratch.
 
-Once the repository has been checked out, you can build the Docker images and have them ready for use
-
-```shell
-
-# Builds the base image
-docker build . -f Base.Dockerfile -t apache.org/kafka-base:1.0
-
-# Creates the Docker image for Zookeeper
-docker build . -f Zookeeper.Dockerfile -t apache.org/zookeeper:1.0
-
-# Creates the Docker image for Kafka Brokers and Quorum Controllers
-docker build . -f Broker.Dockerfile -t apache.org/kafka:1.0
-
-# Creates the Docker image for Kafka Connect
-docker build . -f Connect.Dockerfile -t apache.org/connect:1.0
-
-```
-
+Otherwise, you can run the Docker Compose scripts AS-IS to use my latest build for Kafka 3.0.0
 
 ## Running the Containers in Docker Compose
 
@@ -125,6 +112,29 @@ docker-compose --env-file ./environment-variables.sh -f multi-node-docker-compos
 
 # Shuts down the containers
 docker-compose --env-file ./environment-variables.sh -f multi-node-docker-compose.yml down --remove-orphans
+
+```
+
+### Building the Docker Images from Scratch
+
+Once the repository has been checked out, if you would like to build the images yourself and customize it to your linking, you can build the Docker images and have them ready for use.
+
+If you are building your own images, please make sure to update the Docker Compose files accordingly to use your own image names.
+
+
+```bash
+
+# Builds the base image
+docker build . -f Base.Dockerfile -t apache.org/kafka-base:3.0
+
+# Creates the Docker image for Zookeeper
+docker build . -f Zookeeper.Dockerfile -t apache.org/zookeeper:3.0
+
+# Creates the Docker image for Kafka Brokers and Quorum Controllers
+docker build . -f Broker.Dockerfile -t apache.org/kafka:3.0
+
+# Creates the Docker image for Kafka Connect
+docker build . -f Connect.Dockerfile -t apache.org/connect:3.0
 
 ```
 

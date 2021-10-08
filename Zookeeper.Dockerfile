@@ -1,4 +1,4 @@
-FROM apache.org/kafka-base:1.0
+FROM izzyacademy/kafka-base:3.0.0
 
 # in Zookeeper, Brokers and Connect Docker images:
 # Copy over the python scripts and generate the configs for Zookeeper
@@ -20,4 +20,4 @@ EXPOSE 3888
 
 ENTRYPOINT ["/usr/local/software/kafka/bin/zookeeper-entrypoint.sh"]
 
-# docker build . -f Zookeeper.Dockerfile -t apache.org/zookeeper:1.0
+# docker build . -f Zookeeper.Dockerfile -t izzyacademy/zookeeper:3.0.0
