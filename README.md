@@ -138,13 +138,71 @@ docker build . -f Connect.Dockerfile -t apache.org/connect:3.0
 
 ```
 
+### Commands to Explore the Cluster in Legacy Mode
+
+These commands are primarily for exploring the cluster in KRaft mode without Zookeeper.
+
+However, you can also use the syntax for creating topics to interact with clusters in legacy mode.
+
+```bash
+# Log on to NodeId=2
+docker exec -it broker2 /bin/bash
+
+# Navigate to the directory
+cd /usr/local/software/kafka/bin
+
+
+./kafka-log-dirs.sh --describe --bootstrap-server localhost:9092
+
+./kafka-broker-api-versions.sh --bootstrap-server localhost:9092
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic citypopulation --partitions 1 --replication-factor 1
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic countrypopulation --partitions 2 --replication-factor 1
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic worldcapitals --partitions 3 --replication-factor 2
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic uscapitals --partitions 3 --replication-factor 5
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --list
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe uscapitals
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe worldcapitals
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe countrypopulation
+
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe citypopulation
+
+# Keys with numbers as the keys and the square roots as the value
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic freedomzone --property "parse.key=true" --property "key.separator=,"
+
+64,Eight
+100,Ten
+4,Two
+1,One
+
+# https://www.britannica.com/topic/list-of-state-capitals-in-the-United-States-2119210
+
+./kafka-console-producer.sh --broker-list localhost:9092 --topic uscapitals --property "parse.key=true" --property "key.separator=:"
+
+Florida:Tallahasee
+Georgia:Atlanta
+Maine:Augusta
+Hawaii:Hononulu
+
+./kafka-console-consumer.sh --new-consumer --bootstrap-server localhost:9092 --topic uscapitals --property print.key=true --property key.separator=":" --from-beginning
+
+
+```
+
 ### Commands to Explore the Cluster in Kraft Mode
 
 These commands are primarily for exploring the cluster in KRaft mode without Zookeeper.
 
 However, you can also use the syntax for creating topics to interact with clusters in legacy mode.
 
-```shell
+```bash
 # Log on to NodeId=2
 docker exec -it node2 /bin/bash
 
