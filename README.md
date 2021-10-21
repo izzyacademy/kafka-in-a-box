@@ -1,5 +1,7 @@
 
-# Kafka in a Box (Running on Docker)
+# Kafka in a Box (Running on Docker Compose and Kubernetes)
+
+## Running on Docker Compose
 
 A repository for generating artifacts and resources to run an Apache Kafka cluster on docker containers using vanilla Apache Kafka
 
