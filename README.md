@@ -1,7 +1,7 @@
 
-# Running Vanilla Apache Kafka in a Box (Docker Compose and Kubernetes)
+# Running Vanilla Apache Kafka (Docker Compose and Kubernetes)
 
-## Running on Docker Compose
+## Running Apache Kafka 3.0 on Docker Compose
 
 A repository for generating artifacts and resources to run an Apache Kafka cluster on docker containers using vanilla Apache Kafka
 
@@ -266,7 +266,7 @@ Hawaii:Hononulu
 ```
 
 
-## Running on Kubernetes
+## Running Apache Kafka 3.0 on Kubernetes
 
 Running on Kubernetes is very similar to running on Docker Hub expect that the set up instructions are slightly different.
 
