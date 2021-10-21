@@ -262,3 +262,66 @@ Hawaii:Hononulu
 
 
 ```
+
+
+## Running on Kubernetes
+
+Running on Kubernetes is very similar to running on Docker Hub expect that the set up instructions are slightly different.
+
+Directions for setting up your Kubernetes environment is available [here](kubernetes/setting-up-the-cluster/README.md)
+
+Then we can navigate to the kubernetes/helm-charts folder to start installing our cluster components.
+
+Note that the hostnames within the Kubernetes cluster (using Cluster IP addresses) are different from the experience in Docker Compose
+
+For local set up we use the desktop charts and for the Cloud, we can use the azure-cloud charts.
+
+### Create the Kubernetes Namespace
+
+Run the following command to create the namespace for our resources. This is a pre-requisite before any of the components are installed.
+
+```bash
+
+cd kubernetes/helm-charts
+
+kubectl create ns river 
+
+```
+
+### Setting up Kafka Cluster in Legacy Mode (with Zookeeper)
+
+```bash
+
+# Run the following command to set up Zookeeper
+helm upgrade --install river-zookeeper ./desktop --set zookeeper.enabled=true
+
+# Wait for Zookeeper to be ready before you install the brokers
+helm upgrade --install river-broker ./desktop --set legacy.enabled=true
+
+# To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
+kubectl -n river exec deploy/broker2 -it -- bash 
+
+# To tear down the cluster run the following commands
+helm uninstall river-zookeeper river-broker
+
+```
+
+### Setting up Kafka Cluster in KRaft Mode (without Zookeeper)
+
+```bash
+
+# Setting up Zookeeper is NOT necessary in KRaft Mode
+helm upgrade --install river-zookeeper ./desktop --set zookeeper.enabled=false
+
+# Hence, we do NOT have to Wait for Zookeeper to be ready before we install the brokers
+helm upgrade --install river-broker ./desktop --set kraft.enabled=true 
+
+# To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
+kubectl -n river exec deploy/node2 -it -- bash
+
+# To tear down the cluster run the following commands
+helm uninstall river-zookeeper river-broker
+
+```
+
+
