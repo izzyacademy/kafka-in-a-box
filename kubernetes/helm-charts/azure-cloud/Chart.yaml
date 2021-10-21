@@ -15,7 +15,7 @@
 
 apiVersion: v3
 
-name: Vanilla Apache Kafka on Kubernetes via Docker Desktop, Minikube or Kind
+name: Vanilla Apache Kafka on Azure Kubernetes Service
 
 description: A Helm chart for deploying a simplified Kafka Environment
 

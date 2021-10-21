@@ -1,0 +1,69 @@
+# Licensed to IzzyAcademy.com under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# IzzyAcademy.com licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# kubectl create ns river (if not created already)
+infrastructure:
+  namespace: "river"
+  storageClass: "managed-premium" # just kidding. No storage class available in local docker desktop
+
+# helm upgrade --install river-zookeeper ./desktop --set zookeeper.enabled=true
+# helm uninstall river-zookeeper
+zookeeper:
+  enabled: false
+  tickTime: "2000"
+  connect: "zookeeper1-internal:2181"
+  zookeeperCPU: "250m"
+  zookeeperMemory: "900Mi"
+  zookeeperHeap: "-Xms128m -Xmx512m"
+
+# helm upgrade --install river-broker ./desktop --set legacy.enabled=true (for kafka with Zookeeper)
+# helm uninstall river-broker
+legacy:
+  enabled: false
+  listeners: "LISTENER_ALPHA://0.0.0.0:9092,LISTENER_BETA://0.0.0.0:9093"
+  protocolMap: "LISTENER_ALPHA:PLAINTEXT,LISTENER_BETA:PLAINTEXT"
+  interBrokerListenerName: "LISTENER_ALPHA"
+  domainSuffix: "izzyacademy.com" # This will be used for external access outside the Kubernetes cluster
+  bootstrap: "broker1-internal:9092"
+
+# helm upgrade --install river-broker ./desktop --set kraft.enabled=true (for kafka without Zookeeper)
+# helm uninstall river-broker
+kraft:
+  enabled: false
+  clusterId: "vlzHauhfTMq2S7cLtnwe6A"
+  controllerQuorumVoters: "1@node1-internal:19092,3@node3-internal:19092,4@node4-internal:19092"
+  listeners: "PLAINTEXT_HOST://0.0.0.0:29092,CONTROLLER://0.0.0.0:19092,PLAINTEXT://0.0.0.0:9092"
+  securityProtocolMap: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
+  interBrokerListenerName: "PLAINTEXT"
+  controllerListenerName: "CONTROLLER"
+  logDirs: "/tmp/kraft-logs"
+  metadataLogDirs: "/tmp/kraft-metadata-logs"
+  node1Id: "1"
+  node1Role: "controller"
+  node2Id: "2"
+  node2Role: "broker"
+  node3Id: "3"
+  node3Role: "broker,controller"
+  node4Id: "4"
+  node4Role: "broker,controller"
+
+# kubectl -n river exec deploy/broker1 -it -- bash 
+# kubectl -n river exec deploy/node1 -it -- bash 
+broker:
+  failureThreshold: 3
+  brokerCPU: "250m"
+  brokerMemory: "900Mi"
+  brokerHeap: "-Xms128m -Xmx512m"
+

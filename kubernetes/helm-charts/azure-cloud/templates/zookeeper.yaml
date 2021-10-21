@@ -1,0 +1,132 @@
+# Licensed to IzzyAcademy.com under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# IzzyAcademy.com licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+{{- if .Values.zookeeper.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zookeeper1
+  namespace: "{{ .Values.infrastructure.namespace }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: zookeeper1
+    spec:
+      containers:
+      - image: "izzyacademy/zookeeper:3.0.0"
+        name: zookeeper1
+        resources:
+          requests:
+            memory: {{ .Values.zookeeper.zookeeperMemory }}
+            cpu: {{ .Values.zookeeper.zookeeperCPU }}
+          limits:
+            memory: {{ .Values.zookeeper.zookeeperMemory }}
+            cpu: {{ .Values.zookeeper.zookeeperCPU }}
+        env:
+        - name: ZOOKEEPER_CLIENT_PORT
+          value: "2181"
+        - name: ZOOKEEPER_TICK_TIME
+          value: "2000"
+        - name: KAFKA_HEAP_OPTS
+          value: {{ .Values.zookeeper.zookeeperHeap }}
+        ports:
+        - containerPort: 2181
+          name: clientport
+        - containerPort: 8080
+          name: adminport
+        livenessProbe:
+          httpGet:
+            path: /commands
+            port: adminport
+          initialDelaySeconds: 90
+          failureThreshold: 3
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /commands
+            port: adminport
+          initialDelaySeconds: 90
+          failureThreshold: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: "zookeeper1-volume"
+          mountPath: /var/lib/zookeeper
+      volumes:
+      - name: "zookeeper1-volume"
+        persistentVolumeClaim:
+          claimName: "zookeeper1-persistent-storage"
+
+---
+# This is the external load balancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: "zookeeper1-external"
+  namespace: "{{ .Values.infrastructure.namespace }}"
+spec:
+  type: "ClusterIP"
+  ports:
+  - port: 2181
+    protocol: TCP
+    name: clientport
+  - port: 8080
+    protocol: TCP
+    name: adminport
+  selector:
+    app: zookeeper1
+---
+# This is the internal load balancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: "zookeeper1-internal"
+  namespace: "{{ .Values.infrastructure.namespace }}"
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: "NodePort" # Kubernetes will find something between 30000-32767
+  ports:
+  - port: 2181
+    protocol: TCP
+    name: clientport
+  - port: 8080
+    protocol: TCP
+    name: adminport
+  selector:
+    app: zookeeper1
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "zookeeper1-persistent-storage"
+  namespace: "{{ .Values.infrastructure.namespace }}"
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: {{ .Values.infrastructure.storageClass }}
+  resources:
+    requests:
+      storage: 5Gi
+
+{{- end }}
