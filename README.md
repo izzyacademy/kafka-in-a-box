@@ -1,5 +1,5 @@
 
-# Vanilla Apache Kafka in a Box (Running on Docker Compose and Kubernetes)
+# Running Vanilla Apache Kafka in a Box (Docker Compose and Kubernetes)
 
 ## Running on Docker Compose
 
