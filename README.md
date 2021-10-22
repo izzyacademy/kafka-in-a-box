@@ -338,3 +338,59 @@ helm uninstall river-zookeeper river-broker
 ```
 
 
+### Running in the Cloud via Azure Kubernetes Service 
+
+You can use the Azure Cloud Shell to run the following commands without having to set up any of the clients locally. That is the beauty of doing it in the cloud.
+
+Once your Azure Kubernetes Service cluster has been set up, please follow the steps below to set it up locally.
+
+The primary differences between running it locally and running it on Azure is that in the local environment we are not using persistent volumes and cloud provided load balancers. The cloud version uses Azure Disks to persist the data across container restarts and leverages the internal Azure Load balancers to expose the services to clients. On the other hand, the local version uses NodePort services to expose the services to clients and does not use persistent volumes to store the broker data and metadata.
+
+
+### Create the Kubernetes Namespace
+
+Run the following command to create the namespace for our resources. This is a pre-requisite before any of the components are installed.
+
+```bash
+
+cd kubernetes/helm-charts
+
+kubectl create ns river 
+
+```
+
+### Setting up Kafka Cluster in Legacy Mode (with Zookeeper)
+
+```bash
+
+# Run the following command to set up Zookeeper
+helm upgrade --install river-zookeeper ./azure-cloud --set zookeeper.enabled=true
+
+# Wait for Zookeeper to be ready before you install the brokers
+helm upgrade --install river-broker ./azure-cloud --set legacy.enabled=true
+
+# To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
+kubectl -n river exec deploy/broker2 -it -- bash 
+
+# To tear down the cluster run the following commands
+helm uninstall river-zookeeper river-broker
+
+```
+
+### Setting up Kafka Cluster in KRaft Mode (without Zookeeper)
+
+```bash
+
+# Setting up Zookeeper is NOT necessary in KRaft Mode
+helm upgrade --install river-zookeeper ./azure-cloud --set zookeeper.enabled=false
+
+# Hence, we do NOT have to Wait for Zookeeper to be ready before we install the brokers
+helm upgrade --install river-broker ./azure-cloud --set kraft.enabled=true 
+
+# To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
+kubectl -n river exec deploy/node2 -it -- bash
+
+# To tear down the cluster run the following commands
+helm uninstall river-zookeeper river-broker
+
+```
