@@ -7,7 +7,7 @@
 - [Running in Apache Kafka 3.0 KRaft Mode (Single-Node Cluster) on Docker Compose](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-in-kraft-mode-single-node-cluster)
 - [Running in Apache Kafka 3.0 KRaft Mode (Multi-Node Cluster) on Docker Compose](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-in-kraft-mode-multi-node-cluster)
 - [Running Apache Kafka 3.0 on Kubernetes Locally](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-apache-kafka-30-on-kubernetes)
-- [Running Apache Kafka 3.0 on Kubernetes in Azure](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-apache-kafka-30-on-kubernetes)
+- [Running Apache Kafka 3.0 on Kubernetes in Azure](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-in-the-cloud-via-azure-kubernetes-service)
 - [Exploring the Clusters in Legacy Mode](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#commands-to-explore-the-cluster-in-legacy-mode)
 - [Exploring the Clusters in KRaft Mode](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#commands-to-explore-the-cluster-in-kraft-mode)
 
