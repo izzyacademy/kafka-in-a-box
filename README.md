@@ -276,8 +276,7 @@ Hawaii:Hononulu
 
 ```
 
-
-## Running Apache Kafka 3.0 on Kubernetes
+## Running Apache Kafka 3.0 on Kubernetes Locally
 
 Running on Kubernetes is very similar to running on Docker Hub expect that the set up instructions are slightly different.
 
