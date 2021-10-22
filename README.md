@@ -34,6 +34,8 @@ docker build . -f Connect.Dockerfile -t apache.org/connect:3.0
 
 ```
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ## Running Apache Kafka 3.0 on Docker Compose
 
 A repository for generating artifacts and resources to run an Apache Kafka cluster on docker containers using vanilla Apache Kafka
@@ -70,6 +72,8 @@ If you would like to build the Docker images yourself, checkout the section belo
 
 Otherwise, you can run the Docker Compose scripts AS-IS to use my latest build for Kafka 3.0.0
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ## Running the Containers in Docker Compose
 
 The following sections describe how to run the docker images as Kafka clusters
@@ -77,6 +81,8 @@ The following sections describe how to run the docker images as Kafka clusters
 The first section describes how to run a Kafka cluster in Zookeeper mode (legacy mode)
 
 The second section describes how to run a single and multi-node cluster in KRaft mode (without Zookeeper)
+
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Running in Legacy Mode (With Zookeeper)
 
@@ -99,6 +105,8 @@ docker-compose down --remove-orphans
 
 ```
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ### Running in KRaft Mode (Single-Node Cluster)
 
 This setup creates a single node cluster that runs without Zookeeper
@@ -113,6 +121,8 @@ docker-compose up
 # Shuts down the containers
 docker-compose down --remove-orphans
 ```
+
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Running in KRaft Mode (Multi-Node Cluster)
 
@@ -150,6 +160,7 @@ docker-compose --env-file ./environment-variables.sh -f multi-node-docker-compos
 
 ```
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Commands to Explore the Cluster in Legacy Mode
 
@@ -206,6 +217,8 @@ Hawaii:Hononulu
 
 
 ```
+
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Commands to Explore the Cluster in Kraft Mode
 
@@ -275,6 +288,7 @@ Hawaii:Hononulu
 
 
 ```
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ## Running Apache Kafka 3.0 on Kubernetes Locally
 
@@ -288,6 +302,8 @@ Note that the hostnames within the Kubernetes cluster (using Cluster IP addresse
 
 For local set up we use the desktop charts and for the Cloud, we can use the azure-cloud charts.
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ### Create the Kubernetes Namespace
 
 Run the following command to create the namespace for our resources. This is a pre-requisite before any of the components are installed.
@@ -299,6 +315,8 @@ cd kubernetes/helm-charts
 kubectl create ns river 
 
 ```
+
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Setting up Kafka Cluster in Legacy Mode (with Zookeeper)
 
@@ -318,6 +336,8 @@ helm uninstall river-zookeeper river-broker
 
 ```
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ### Setting up Kafka Cluster in KRaft Mode (without Zookeeper)
 
 ```bash
@@ -336,6 +356,7 @@ helm uninstall river-zookeeper river-broker
 
 ```
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Running in the Cloud via Azure Kubernetes Service 
 
@@ -349,6 +370,8 @@ After your cluster is setup you can use [Azure Cloud Shell](https://shell.azure.
 
 The primary differences between running it locally and running it on Azure is that in the local environment we are not using persistent volumes and cloud provided load balancers. The cloud version uses Azure Disks to persist the data across container restarts and leverages the internal Azure Load balancers to expose the services to clients. On the other hand, the local version uses NodePort services to expose the services to clients and does not use persistent volumes to store the broker data and metadata.
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ### Create the Kubernetes Namespace
 
 Run the following command to create the namespace for our resources. This is a pre-requisite before any of the components are installed.
@@ -360,6 +383,7 @@ cd kubernetes/helm-charts
 kubectl create ns river 
 
 ```
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
 ### Setting up Kafka Cluster in Legacy Mode (with Zookeeper)
 
@@ -379,6 +403,8 @@ helm uninstall river-zookeeper river-broker
 
 ```
 
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
+
 ### Setting up Kafka Cluster in KRaft Mode (without Zookeeper)
 
 ```bash
@@ -396,3 +422,5 @@ kubectl -n river exec deploy/node2 -it -- bash
 helm uninstall river-zookeeper river-broker
 
 ```
+
+[Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
