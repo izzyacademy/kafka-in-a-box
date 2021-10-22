@@ -27,8 +27,8 @@ zookeeper:
   zookeeperCPU: "250m"
   zookeeperMemory: "900Mi"
   zookeeperHeap: "-Xms128m -Xmx512m"
-  mountPath: "/var/izzyacademy"
-  logDirs: "/var/izzyacademy/zookeeper-logs"
+  mountPath: "/var/lib"
+  logDirs: "/var/lib/zookeeper"
   
 
 # helm upgrade --install river-broker ./desktop --set legacy.enabled=true (for kafka with Zookeeper)
