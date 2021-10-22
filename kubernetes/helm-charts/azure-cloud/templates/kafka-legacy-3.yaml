@@ -67,6 +67,8 @@ spec:
           value: "9101"
         - name: KAFKA_HEAP_OPTS
           value: {{ .Values.broker.brokerHeap }}
+        - name: KAFKA_LOG_DIRS
+          value: {{ .Values.broker.logDirs }}
         ports:
         - containerPort: 9092
           name: primary
@@ -88,7 +90,7 @@ spec:
           periodSeconds: 15
         volumeMounts:
         - name: "broker3-volume"
-          mountPath: /var/lib/kafka
+          mountPath: {{ .Values.broker.mountPath }}
       volumes:
       - name: "broker3-volume"
         persistentVolumeClaim:

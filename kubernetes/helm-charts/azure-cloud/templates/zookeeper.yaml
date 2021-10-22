@@ -70,7 +70,7 @@ spec:
           periodSeconds: 10
         volumeMounts:
         - name: "zookeeper1-volume"
-          mountPath: /var/lib/zookeeper
+          mountPath: {{ .Values.zookeeper.mountPath }}
       volumes:
       - name: "zookeeper1-volume"
         persistentVolumeClaim:

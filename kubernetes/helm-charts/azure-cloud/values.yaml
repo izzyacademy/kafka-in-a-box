@@ -27,6 +27,9 @@ zookeeper:
   zookeeperCPU: "250m"
   zookeeperMemory: "900Mi"
   zookeeperHeap: "-Xms128m -Xmx512m"
+  mountPath: "/var/izzyacademy"
+  logDirs: "/var/izzyacademy/zookeeper-logs"
+  
 
 # helm upgrade --install river-broker ./desktop --set legacy.enabled=true (for kafka with Zookeeper)
 # helm uninstall river-broker
@@ -48,7 +51,6 @@ kraft:
   securityProtocolMap: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
   interBrokerListenerName: "PLAINTEXT"
   controllerListenerName: "CONTROLLER"
-  logDirs: "/tmp/kraft-logs"
   metadataLogDirs: "/tmp/kraft-metadata-logs"
   node1Id: "1"
   node1Role: "controller"
@@ -66,4 +68,6 @@ broker:
   brokerCPU: "250m"
   brokerMemory: "900Mi"
   brokerHeap: "-Xms128m -Xmx512m"
+  mountPath: "/var/izzyacademy"
+  logDirs: "/var/izzyacademy/kafka-logs"
 

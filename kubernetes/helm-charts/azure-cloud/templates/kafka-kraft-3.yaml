@@ -73,7 +73,7 @@ spec:
         - name: KAFKA_HEAP_OPTS
           value: {{ .Values.broker.brokerHeap }}
         - name: KAFKA_LOG_DIRS
-          value: {{ .Values.kraft.logDirs }}
+          value: {{ .Values.broker.logDirs }}
         ports:
         - containerPort: 9092
           name: primary
@@ -95,7 +95,7 @@ spec:
           periodSeconds: 15
         volumeMounts:
         - name: "node3-volume"
-          mountPath: {{ .Values.kraft.logDirs }}
+          mountPath: {{ .Values.broker.mountPath }}
       volumes:
       - name: "node3-volume"
         persistentVolumeClaim:
