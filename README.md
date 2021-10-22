@@ -343,8 +343,11 @@ You can use the Azure Cloud Shell to run the following commands without having t
 
 Once your Azure Kubernetes Service cluster has been set up, please follow the steps below to set it up locally.
 
-The primary differences between running it locally and running it on Azure is that in the local environment we are not using persistent volumes and cloud provided load balancers. The cloud version uses Azure Disks to persist the data across container restarts and leverages the internal Azure Load balancers to expose the services to clients. On the other hand, the local version uses NodePort services to expose the services to clients and does not use persistent volumes to store the broker data and metadata.
+Directions for setting up your Kubernetes environment is available [here](kubernetes/setting-up-the-cluster/README.md)
 
+After your cluster is setup you can use [Azure Cloud Shell](https://shell.azure.com/) at [shell.azure.com](https://shell.azure.com/) to interact with the cluster to install vanilla Apache Kafka 3.0 on the Azure Kubernetes Service.
+
+The primary differences between running it locally and running it on Azure is that in the local environment we are not using persistent volumes and cloud provided load balancers. The cloud version uses Azure Disks to persist the data across container restarts and leverages the internal Azure Load balancers to expose the services to clients. On the other hand, the local version uses NodePort services to expose the services to clients and does not use persistent volumes to store the broker data and metadata.
 
 ### Create the Kubernetes Namespace
 
