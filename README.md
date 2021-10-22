@@ -1,6 +1,40 @@
 
 # Running Vanilla Apache Kafka (Docker Compose and Kubernetes)
 
+## Outline
+- [Building the Docker Images from Scratch]()
+- [Running Apache Kafka 3.0 on Docker Compose](README.md#running-apache-kafka-30-on-docker-compose)
+- [Running in Legacy Mode (With Zookeeper) on Docker Compose]()
+- [Running in Apache Kafka 3.0 KRaft Mode (Without Zookeeper) on Docker Compose]()
+- [Running in Apache Kafka 3.0 KRaft Mode (Single-Node Cluster) on Docker Compose]()
+- [Running in Apache Kafka 3.0 KRaft Mode (Multi-Node Cluster) on Docker Compose]()
+- [Running Apache Kafka 3.0 on Kubernetes Locally]()
+- [Running Apache Kafka 3.0 on Kubernetes in Azure]()
+- [Exploring the Clusters]()
+
+### Building the Docker Images from Scratch (if you want to)
+
+Once the repository has been checked out, if you would like to build the images yourself and customize it to your linking, you can build the Docker images and have them ready for use.
+
+If you are building your own images, please make sure to update the Docker Compose files accordingly to use your own image names.
+
+
+```bash
+
+# Builds the base image
+docker build . -f Base.Dockerfile -t apache.org/kafka-base:3.0
+
+# Creates the Docker image for Zookeeper
+docker build . -f Zookeeper.Dockerfile -t apache.org/zookeeper:3.0
+
+# Creates the Docker image for Kafka Brokers and Quorum Controllers
+docker build . -f Broker.Dockerfile -t apache.org/kafka:3.0
+
+# Creates the Docker image for Kafka Connect
+docker build . -f Connect.Dockerfile -t apache.org/connect:3.0
+
+```
+
 ## Running Apache Kafka 3.0 on Docker Compose
 
 A repository for generating artifacts and resources to run an Apache Kafka cluster on docker containers using vanilla Apache Kafka
@@ -117,28 +151,6 @@ docker-compose --env-file ./environment-variables.sh -f multi-node-docker-compos
 
 ```
 
-### Building the Docker Images from Scratch
-
-Once the repository has been checked out, if you would like to build the images yourself and customize it to your linking, you can build the Docker images and have them ready for use.
-
-If you are building your own images, please make sure to update the Docker Compose files accordingly to use your own image names.
-
-
-```bash
-
-# Builds the base image
-docker build . -f Base.Dockerfile -t apache.org/kafka-base:3.0
-
-# Creates the Docker image for Zookeeper
-docker build . -f Zookeeper.Dockerfile -t apache.org/zookeeper:3.0
-
-# Creates the Docker image for Kafka Brokers and Quorum Controllers
-docker build . -f Broker.Dockerfile -t apache.org/kafka:3.0
-
-# Creates the Docker image for Kafka Connect
-docker build . -f Connect.Dockerfile -t apache.org/connect:3.0
-
-```
 
 ### Commands to Explore the Cluster in Legacy Mode
 
