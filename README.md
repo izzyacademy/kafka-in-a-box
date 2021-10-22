@@ -2,8 +2,8 @@
 # Running Vanilla Apache Kafka (Docker Compose and Kubernetes)
 
 ## Outline
-- [Building the Docker Images from Scratch]()
-- [Running Apache Kafka 3.0 on Docker Compose](README.md#running-apache-kafka-30-on-docker-compose)
+- [Building the Docker Images from Scratch](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#building-the-docker-images-from-scratch-if-you-want-to)
+- [Running Apache Kafka 3.0 on Docker Compose](#running-apache-kafka-30-on-docker-compose)
 - [Running in Legacy Mode (With Zookeeper) on Docker Compose]()
 - [Running in Apache Kafka 3.0 KRaft Mode (Without Zookeeper) on Docker Compose]()
 - [Running in Apache Kafka 3.0 KRaft Mode (Single-Node Cluster) on Docker Compose]()
