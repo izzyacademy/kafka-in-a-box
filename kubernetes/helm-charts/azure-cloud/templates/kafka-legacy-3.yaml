@@ -104,7 +104,7 @@ metadata:
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
-  type: "ClusterIP"
+  type: "LoadBalancer"
   ports:
   - port: 9092
     protocol: TCP
@@ -123,7 +123,7 @@ metadata:
   name: "broker3-external"
   namespace: "{{ .Values.infrastructure.namespace }}"
 spec:
-  type: "NodePort" # Kubernetes will find something between 30000-32767
+  type: "LoadBalancer" # Sets up a Public IP address for clients to connect to
   ports:
   - port: 9092
     protocol: TCP

@@ -84,7 +84,7 @@ metadata:
   name: "zookeeper1-external"
   namespace: "{{ .Values.infrastructure.namespace }}"
 spec:
-  type: "ClusterIP"
+  type: "LoadBalancer"
   ports:
   - port: 2181
     protocol: TCP
@@ -104,7 +104,7 @@ metadata:
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
 spec:
-  type: "NodePort" # Kubernetes will find something between 30000-32767
+  type: "LoadBalancer" # Sets up an internal load balancer ip for clients and brokers to hook up with
   ports:
   - port: 2181
     protocol: TCP
