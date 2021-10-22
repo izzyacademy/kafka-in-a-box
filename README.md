@@ -3,14 +3,13 @@
 
 ## Outline
 - [Building the Docker Images from Scratch](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#building-the-docker-images-from-scratch-if-you-want-to)
-- [Running Apache Kafka 3.0 on Docker Compose](#running-apache-kafka-30-on-docker-compose)
-- [Running in Legacy Mode (With Zookeeper) on Docker Compose]()
-- [Running in Apache Kafka 3.0 KRaft Mode (Without Zookeeper) on Docker Compose]()
-- [Running in Apache Kafka 3.0 KRaft Mode (Single-Node Cluster) on Docker Compose]()
-- [Running in Apache Kafka 3.0 KRaft Mode (Multi-Node Cluster) on Docker Compose]()
-- [Running Apache Kafka 3.0 on Kubernetes Locally]()
-- [Running Apache Kafka 3.0 on Kubernetes in Azure]()
-- [Exploring the Clusters]()
+- [Running in Legacy Mode (With Zookeeper) on Docker Compose](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-in-legacy-mode-with-zookeeper)
+- [Running in Apache Kafka 3.0 KRaft Mode (Single-Node Cluster) on Docker Compose](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-in-kraft-mode-single-node-cluster)
+- [Running in Apache Kafka 3.0 KRaft Mode (Multi-Node Cluster) on Docker Compose](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-in-kraft-mode-multi-node-cluster)
+- [Running Apache Kafka 3.0 on Kubernetes Locally](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-apache-kafka-30-on-kubernetes)
+- [Running Apache Kafka 3.0 on Kubernetes in Azure](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#running-apache-kafka-30-on-kubernetes)
+- [Exploring the Clusters in Legacy Mode](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#commands-to-explore-the-cluster-in-legacy-mode)
+- [Exploring the Clusters in KRaft Mode](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#commands-to-explore-the-cluster-in-kraft-mode)
 
 ### Building the Docker Images from Scratch (if you want to)
 
