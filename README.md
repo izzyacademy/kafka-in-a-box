@@ -331,10 +331,15 @@ helm upgrade --install river-broker ./desktop --set legacy.enabled=true
 # To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
 kubectl -n river exec deploy/broker2 -it -- bash 
 
+# To find out about the defined services, run this command:
+kubectl -n river get svc
+
 # To tear down the cluster run the following commands
 helm uninstall river-zookeeper river-broker
 
 ```
+
+Once inside the Kubernetes cluster, you can use any of the defined services to reach any of the brokers/controllers in the cluster.
 
 [Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
@@ -351,10 +356,15 @@ helm upgrade --install river-broker ./desktop --set kraft.enabled=true
 # To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
 kubectl -n river exec deploy/node2 -it -- bash
 
+# To find out about the defined services, run this command:
+kubectl -n river get svc
+
 # To tear down the cluster run the following commands
 helm uninstall river-zookeeper river-broker
 
 ```
+
+Once inside the Kubernetes cluster, you can use any of the defined services to reach any of the brokers/controllers in the cluster.
 
 [Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
@@ -398,10 +408,15 @@ helm upgrade --install river-broker ./azure-cloud --set legacy.enabled=true
 # To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
 kubectl -n river exec deploy/broker2 -it -- bash 
 
+# To find out about the defined services, run this command:
+kubectl -n river get svc
+
 # To tear down the cluster run the following commands
 helm uninstall river-zookeeper river-broker
 
 ```
+
+Once inside the Kubernetes cluster, you can use any of the defined services to reach any of the brokers/controllers in the cluster.
 
 [Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
 
@@ -418,9 +433,14 @@ helm upgrade --install river-broker ./azure-cloud --set kraft.enabled=true
 # To attach to one of the broker containers within Kubernetes, you can use the following kubectl command
 kubectl -n river exec deploy/node2 -it -- bash
 
+# To find out about the defined services, run this command:
+kubectl -n river get svc
+
 # To tear down the cluster run the following commands
 helm uninstall river-zookeeper river-broker
 
 ```
+
+Once inside the Kubernetes cluster, you can use any of the defined services to reach any of the brokers/controllers in the cluster.
 
 [Return to the Top](https://github.com/izzyacademy/kafka-in-a-box/blob/main/README.md#outline)
