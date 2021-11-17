@@ -188,13 +188,13 @@ cd /usr/local/software/kafka/bin
 
 ./kafka-topics.sh --bootstrap-server localhost:9092 --list
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe uscapitals
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic uscapitals
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe worldcapitals
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic worldcapitals
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe countrypopulation
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic countrypopulation
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe citypopulation
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic citypopulation
 
 # Keys with numbers as the keys and the square roots as the value
 bin/kafka-console-producer.sh --broker-list localhost:9092 --topic freedomzone --property "parse.key=true" --property "key.separator=,"
@@ -255,13 +255,13 @@ cd /usr/local/software/kafka/bin
 
 ./kafka-topics.sh --bootstrap-server localhost:9092 --list
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe uscapitals
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic uscapitals
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe worldcapitals
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic worldcapitals
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe countrypopulation
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic countrypopulation
 
-./kafka-topics.sh --bootstrap-server localhost:9092 --describe citypopulation
+./kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic citypopulation
 
 ./kafka-metadata-shell.sh  --snapshot /tmp/kraft-logs/@metadata-0/00000000000000000000.log
 
