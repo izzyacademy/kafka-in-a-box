@@ -52,7 +52,6 @@ services:
     container_name: node2
     ports:
       - "29092:29092"
-      - "19092:19092"
       - "9092:9092"
       - "9102:9102"
     environment:
